@@ -1,6 +1,6 @@
 import os
 
-VERSION = "0.0.1"
+VERSION = "0.0.2"
 CONFIG_FILE = "/etc/k3s_slack.json"
 INSTALL_LOCATION = "/usr/local/lib/python3.9/site-packages/k3s_slack"
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN", "")
