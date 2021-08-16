@@ -1,6 +1,8 @@
+import os
+
 import requests
 
-from k3s_slack.config import VERSION, VERSION_CHECK_URL
+from k3s_slack.config import VERSION, VERSION_CHECK_URL, INSTALL_LOCATION
 from k3s_slack.utils import get_logger
 
 LOGGER = get_logger(__name__)
@@ -14,7 +16,8 @@ def print_help(say):
 
 
 def self_update(say):
-    say(f"I'm running *{VERSION}*")
+    if os.geteuid() != 0 or not os.path.isdir(INSTALL_LOCATION):
+        say(f"Bot is not running as a service, unable to self-update")
 
 
 def check_updates(say):
