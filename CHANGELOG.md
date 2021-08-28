@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.3 (2021-08-28)
+### Fix
+* Delay to make sure githubusercontent has current content ([`dc35d44`](https://github.com/jdobes/k3s-slack-bot/commit/dc35d44b31bd7fb695a86853c2d12689dc8f8943))
+
 ## v0.2.2 (2021-08-28)
 ### Fix
 * Reduce restart delay ([`ab5ea35`](https://github.com/jdobes/k3s-slack-bot/commit/ab5ea35ed13ea9d249a9f9252403cb1eca26cfa4))
