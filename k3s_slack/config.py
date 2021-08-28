@@ -2,7 +2,7 @@ import os
 import sys
 import json
 
-VERSION = "0.2.0"
+VERSION = "0.2.1"
 
 CONFIG_FILE = "/etc/k3s_slack.json"
 try:
