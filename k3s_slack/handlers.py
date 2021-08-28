@@ -9,9 +9,9 @@ from k3s_slack.utils import get_logger, run_command
 LOGGER = get_logger(__name__)
 
 
-def _get_latest_bot_version():
+def _get_latest_bot_version(git_ref="master"):
     latest_version = "unknown"
-    r = requests.get(CFG.VERSION_CHECK_URL)
+    r = requests.get(CFG.VERSION_CHECK_URL % git_ref)
     if r.status_code == 200:
         for line in r.text.splitlines():
             if line.startswith("VERSION"):
@@ -27,14 +27,14 @@ def print_help(say):
          "check-updates - Prints currently running versions and if there is an update"))
 
 
-def self_update(say=None, force=False):
+def self_update(say=None, force=False, git_ref="master"):
     if os.geteuid() != 0 or not CFG.SERVICE_MODE:
         LOGGER.info("Bot is not running as a service, unable to self-update")
         if say:
             say(f"Bot is not running as a service, unable to self-update")
         return
 
-    latest_version = _get_latest_bot_version()
+    latest_version = _get_latest_bot_version(git_ref=git_ref)
     if CFG.VERSION == latest_version and not force:
         LOGGER.info("Bot is already running latest version")
         if say:
@@ -42,7 +42,7 @@ def self_update(say=None, force=False):
         return
 
     with tempfile.NamedTemporaryFile() as fp:
-        r = requests.get(CFG.INSTALLER_URL)
+        r = requests.get(CFG.INSTALLER_URL % git_ref)
         if r.status_code == 200:
             fp.write(r.content)
             fp.flush()
