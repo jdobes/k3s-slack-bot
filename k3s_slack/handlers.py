@@ -9,6 +9,17 @@ from k3s_slack.utils import get_logger, run_command
 LOGGER = get_logger(__name__)
 
 
+def _get_latest_bot_version():
+    latest_version = "unknown"
+    r = requests.get(VERSION_CHECK_URL)
+    if r.status_code == 200:
+        for line in r.text.splitlines():
+            if line.startswith("VERSION"):
+                latest_version = line.split("=")[1].strip().strip('"')
+                break
+    return latest_version
+
+
 def print_help(say):
     say(("Available commands:\n"
          "help - Prints this help\n"
@@ -30,14 +41,7 @@ def self_update(say):
 
 
 def check_updates(say):
-    latest_version = "unknown"
-    r = requests.get(VERSION_CHECK_URL)
-    if r.status_code == 200:
-        for line in r.text.splitlines():
-            if line.startswith("VERSION"):
-                latest_version = line.split("=")[1].strip().strip('"')
-                break
-
+    latest_version = _get_latest_bot_version()
     if VERSION == latest_version:
         say(f"I'm running k3s-slack-bot version *{VERSION}*, this is the latest version")
     else:
