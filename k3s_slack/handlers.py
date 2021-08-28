@@ -3,7 +3,7 @@ import tempfile
 
 import requests
 
-from k3s_slack.config import VERSION, VERSION_CHECK_URL, INSTALL_LOCATION, INSTALLER_URL, SLACK_BOT_TOKEN, SLACK_APP_TOKEN
+from k3s_slack.config import VERSION, VERSION_CHECK_URL, INSTALLER_URL, SLACK_BOT_TOKEN, SLACK_APP_TOKEN, SERVICE_MODE
 from k3s_slack.utils import get_logger, run_command
 
 LOGGER = get_logger(__name__)
@@ -17,7 +17,7 @@ def print_help(say):
 
 
 def self_update(say):
-    if os.geteuid() != 0 or not os.path.isdir(INSTALL_LOCATION):
+    if os.geteuid() != 0 or not SERVICE_MODE:
         say(f"Bot is not running as a service, unable to self-update")
         return
 
@@ -26,12 +26,7 @@ def self_update(say):
         if r.status_code == 200:
             fp.write(r.content)
             fp.flush()
-            stdout, stderr = run_command(["bash", fp.name], env={"SLACK_BOT_TOKEN": SLACK_BOT_TOKEN, "SLACK_APP_TOKEN": SLACK_APP_TOKEN})
-            say(("stdout:\n"
-                 f"{stdout}\n\n"
-                 "stderr:\n"
-                 f"{stderr}"))
-
+            _, _ = run_command(["bash", fp.name], env={"SLACK_BOT_TOKEN": SLACK_BOT_TOKEN, "SLACK_APP_TOKEN": SLACK_APP_TOKEN})
 
 
 def check_updates(say):

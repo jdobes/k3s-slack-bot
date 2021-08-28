@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 
 VERSION = "0.1.0"
@@ -10,7 +11,7 @@ try:
 except FileNotFoundError:
     CFG = {}
 
-INSTALL_LOCATION = "/usr/local/lib/python3.9/site-packages/k3s_slack"
+SERVICE_MODE = "-s" in sys.argv
 
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN", "")
 if not SLACK_BOT_TOKEN:

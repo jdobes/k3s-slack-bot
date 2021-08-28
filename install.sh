@@ -15,6 +15,7 @@ install_app () {
     for f in __init__.py app.py config.py handlers.py utils.py; do
         curl -o "$PYTHON_LIB_DIR/$PYTHON_PACKAGE_NAME/$f" "$SOURCE_GIT/$PYTHON_PACKAGE_NAME/$f"
     done
+    curl -o "/etc/systemd/system/k3s-slack-bot.service" "$SOURCE_GIT/k3s-slack-bot.service"
 }
 
 install_config () {
@@ -26,6 +27,12 @@ install_config () {
 EOF
 }
 
+service_up () {
+    systemctl enable k3s-slack-bot.service
+    systemctl restart k3s-slack-bot.service
+}
+
 install_deps
 install_app
 install_config
+service_up

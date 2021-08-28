@@ -1,0 +1,13 @@
+[Unit]
+Description=K3S Slack Bot
+Wants=network-online.target
+After=network-online.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5s
+ExecStart=/usr/bin/env python3 -m k3s_slack.app -s
