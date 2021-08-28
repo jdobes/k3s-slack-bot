@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.4 (2021-08-28)
+### Fix
+* Check specified hash due to github raw caching ([`505d1db`](https://github.com/jdobes/k3s-slack-bot/commit/505d1db59cb8f3a09d63f44ef6801165ac5b50d8))
+
 ## v0.2.3 (2021-08-28)
 ### Fix
 * Delay to make sure githubusercontent has current content ([`dc35d44`](https://github.com/jdobes/k3s-slack-bot/commit/dc35d44b31bd7fb695a86853c2d12689dc8f8943))
