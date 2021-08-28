@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.2 (2021-08-28)
+### Fix
+* Reduce restart delay ([`ab5ea35`](https://github.com/jdobes/k3s-slack-bot/commit/ab5ea35ed13ea9d249a9f9252403cb1eca26cfa4))
+
 ## v0.2.1 (2021-08-28)
 ### Fix
 * More logs ([`114f687`](https://github.com/jdobes/k3s-slack-bot/commit/114f687010771a3e940b42aa1ccdb325e4261802))
