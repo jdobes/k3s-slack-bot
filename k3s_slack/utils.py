@@ -1,7 +1,7 @@
 import logging
 import subprocess
 
-from k3s_slack.config import LOGGING_LEVEL
+import k3s_slack.config as CFG
 
 
 def init_logging():
@@ -10,7 +10,7 @@ def init_logging():
 
 def get_logger(name):
     logger = logging.getLogger(name)
-    logger.setLevel(getattr(logging, LOGGING_LEVEL, logging.INFO))
+    logger.setLevel(getattr(logging, CFG.LOGGING_LEVEL, logging.INFO))
     return logger
 
 
