@@ -7,3 +7,4 @@ Slack bot monitoring and managing k3s and deployed services
 
 - Installs on top of clean RHEL 8, installs Python and dependencies
 - Deploys and enables Slack bot as systemd service
+- Watching Slack channel with GitHub updates messages produced by GitHub App
