@@ -18,6 +18,7 @@ def handle_message_help(say):
 
 @app.message("self-update")
 def handle_message_help(say):
+    LOGGER.info("Self-update requested")
     self_update(say=say, force=True)
 
 
@@ -31,7 +32,7 @@ def handle_message_events(message):
     if message["channel"] == CFG.GITHUB_UPDATES_CHANNEL_ID:
         for attachement in message.get("attachments", []):
             if CFG.BOT_GH_REPO in attachement["text"]:
-                LOGGER.info("Bot repo update, running update")
+                LOGGER.info("Bot repo update, running self-update")
                 self_update(force=False)
                 break
 

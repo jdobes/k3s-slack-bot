@@ -29,12 +29,14 @@ def print_help(say):
 
 def self_update(say=None, force=False):
     if os.geteuid() != 0 or not CFG.SERVICE_MODE:
+        LOGGER.info("Bot is not running as a service, unable to self-update")
         if say:
             say(f"Bot is not running as a service, unable to self-update")
         return
 
     latest_version = _get_latest_bot_version()
     if CFG.VERSION == latest_version and not force:
+        LOGGER.info("Bot is already running latest version")
         if say:
             say(f"Bot is already running latest version")
         return
