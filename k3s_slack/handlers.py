@@ -1,5 +1,4 @@
 import os
-import tempfile
 
 import k3s_slack.config as CFG
 from k3s_slack.utils import get_logger, run_command, ensure_latest_git_repo
