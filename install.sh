@@ -21,7 +21,7 @@ install_app () {
             cd /tmp/k3s-slack-bot
             git pull --rebase=false
         fi
-        cp "$PYTHON_PACKAGE_NAME/*.py" "$PYTHON_LIB_DIR/$PYTHON_PACKAGE_NAME/"
+        cp $PYTHON_PACKAGE_NAME/*.py "$PYTHON_LIB_DIR/$PYTHON_PACKAGE_NAME/"
         cp -f k3s-slack-bot.service /etc/systemd/system/k3s-slack-bot.service
     )
 }
