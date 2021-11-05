@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.0 (2021-11-05)
+### Feature
+* K3s installation ([`726cbfb`](https://github.com/jdobes/k3s-slack-bot/commit/726cbfb9eb57bf902be245395d9d1e5eadeb08f0))
+
 ## v0.2.4 (2021-08-28)
 ### Fix
 * Check specified hash due to github raw caching ([`505d1db`](https://github.com/jdobes/k3s-slack-bot/commit/505d1db59cb8f3a09d63f44ef6801165ac5b50d8))
