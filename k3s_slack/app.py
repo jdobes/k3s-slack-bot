@@ -37,7 +37,7 @@ def handle_message_check_updates(say):
 def handle_message_events(message):
     if message["channel"] == CFG.GITHUB_UPDATES_CHANNEL_ID:
         for attachement in message.get("attachments", []):
-            if CFG.BOT_GH_REPO in attachement["text"]:
+            if CFG.BOT_GH_REPO_NAME in attachement["text"]:
                 LOGGER.info(f"Bot repo update, running self-update")
                 self_update(force=False)
                 break
