@@ -1,4 +1,7 @@
 import os
+import tempfile
+
+import requests
 
 import k3s_slack.config as CFG
 from k3s_slack.utils import get_logger, run_command, ensure_latest_git_repo
@@ -22,6 +25,7 @@ def print_help(say):
     say(("Available commands:\n"
          "help - Prints this help\n"
          "self-update - Bot updates itself\n"
+         "k3s-update - K3s update\n"
          "check-updates - Prints currently running versions and if there is an update"))
 
 
@@ -41,6 +45,17 @@ def self_update(say=None, force=False):
 
     run_command(["bash", f"/tmp/{CFG.BOT_GH_REPO_NAME}/{CFG.BOT_INSTALLER_FILE}"],
                 env={"SLACK_BOT_TOKEN": CFG.SLACK_BOT_TOKEN, "SLACK_APP_TOKEN": CFG.SLACK_APP_TOKEN})
+
+
+def k3s_update(say):
+    say("Starting k3s update")
+    with tempfile.NamedTemporaryFile() as fp:
+        r = requests.get(CFG.K3S_INSTALLER_URL)
+        if r.status_code == 200:
+            fp.write(r.content)
+            fp.flush()
+            run_command(["sh", fp.name])
+    say("k3s update finished")
 
 
 def check_updates(say):

@@ -25,5 +25,7 @@ BOT_GH_REPO = f"https://github.com/jdobes/{BOT_GH_REPO_NAME}.git"
 BOT_VERSION_CHECK_FILE = "k3s_slack/config.py"
 BOT_INSTALLER_FILE = "install.sh"
 
+K3S_INSTALLER_URL = "https://get.k3s.io"
+
 LOGGING_LEVEL = os.getenv("LOGGING_LEVEL", "INFO")
 GITHUB_UPDATES_CHANNEL_ID = "C02D25AJKPT"
