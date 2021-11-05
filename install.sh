@@ -1,21 +1,29 @@
 #!/usr/bin/env bash
 
-SOURCE_GIT="https://raw.githubusercontent.com/jdobes/k3s-slack-bot/master"
+SOURCE_GIT="https://github.com/jdobes/k3s-slack-bot.git"
 PYTHON_LIB_DIR="/usr/local/lib/python3.9/site-packages"
 PYTHON_PACKAGE_NAME="k3s_slack"
 
 install_deps () {
-    dnf -y --best install python39 python39-pip
+    dnf -y --best install python39 python39-pip git
     pip3 install -U slack_bolt requests
 }
 
 install_app () {
     rm -rf "$PYTHON_LIB_DIR/$PYTHON_PACKAGE_NAME"
     mkdir "$PYTHON_LIB_DIR/$PYTHON_PACKAGE_NAME"
-    for f in __init__.py app.py config.py handlers.py utils.py; do
-        curl -o "$PYTHON_LIB_DIR/$PYTHON_PACKAGE_NAME/$f" "$SOURCE_GIT/$PYTHON_PACKAGE_NAME/$f"
-    done
-    curl -o "/etc/systemd/system/k3s-slack-bot.service" "$SOURCE_GIT/k3s-slack-bot.service"
+    (
+        if [ ! -d /tmp/k3s-slack-bot ]; then
+            cd /tmp
+            git clone "$SOURCE_GIT"
+            cd k3s-slack-bot
+        else
+            cd /tmp/k3s-slack-bot
+            git pull
+        fi
+        cp "$PYTHON_PACKAGE_NAME/*.py" "$PYTHON_LIB_DIR/$PYTHON_PACKAGE_NAME/"
+        cp -f k3s-slack-bot.service /etc/systemd/system/k3s-slack-bot.service
+    )
 }
 
 install_config () {

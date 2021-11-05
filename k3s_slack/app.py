@@ -32,9 +32,8 @@ def handle_message_events(message):
     if message["channel"] == CFG.GITHUB_UPDATES_CHANNEL_ID:
         for attachement in message.get("attachments", []):
             if CFG.BOT_GH_REPO in attachement["text"]:
-                git_ref = attachement["text"].split("commit/")[1].split("|")[0]
-                LOGGER.info(f"Bot repo update, git_ref={git_ref}, running self-update")
-                self_update(force=False, git_ref=git_ref)
+                LOGGER.info(f"Bot repo update, running self-update")
+                self_update(force=False)
                 break
 
 

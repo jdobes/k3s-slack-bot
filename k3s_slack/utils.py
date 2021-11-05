@@ -1,3 +1,4 @@
+import os
 import logging
 import subprocess
 
@@ -14,6 +15,13 @@ def get_logger(name):
     return logger
 
 
-def run_command(args, env=None):
-    result = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env, text=True)
+def run_command(args, cwd=None, env=None):
+    result = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=cwd, env=env, text=True)
     return result.stdout, result.stderr
+
+
+def ensure_latest_git_repo(url, repo_name):
+    if os.path.isdir(f"/tmp/{repo_name}/"):
+        run_command(["git", "pull"], cwd=f"/tmp/{repo_name}/")
+    else:
+        run_command(["git", "clone", url], cwd="/tmp")
