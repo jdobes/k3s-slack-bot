@@ -22,6 +22,6 @@ def run_command(args, cwd=None, env=None):
 
 def ensure_latest_git_repo(url, repo_name):
     if os.path.isdir(f"/tmp/{repo_name}/"):
-        run_command(["git", "pull"], cwd=f"/tmp/{repo_name}/")
+        run_command(["git", "pull", "--rebase=false"], cwd=f"/tmp/{repo_name}/")
     else:
         run_command(["git", "clone", url], cwd="/tmp")
