@@ -27,12 +27,15 @@ install_app () {
 }
 
 install_config () {
-    cat <<EOF > /etc/k3s_slack.json
+    config_file="/etc/k3s_slack.json"
+    if [ ! -f $config_file ]; then
+        cat <<EOF > $config_file
 {
     "SLACK_BOT_TOKEN": "$SLACK_BOT_TOKEN",
     "SLACK_APP_TOKEN": "$SLACK_APP_TOKEN"
 }
 EOF
+    fi
 }
 
 service_up () {

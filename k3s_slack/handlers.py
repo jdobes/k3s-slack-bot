@@ -43,8 +43,7 @@ def self_update(say=None, force=False):
             say(f"Bot is already running latest version")
         return
 
-    run_command(["bash", f"/tmp/{CFG.BOT_GH_REPO_NAME}/{CFG.BOT_INSTALLER_FILE}"],
-                env={"SLACK_BOT_TOKEN": CFG.SLACK_BOT_TOKEN, "SLACK_APP_TOKEN": CFG.SLACK_APP_TOKEN})
+    run_command(["bash", f"/tmp/{CFG.BOT_GH_REPO_NAME}/{CFG.BOT_INSTALLER_FILE}"])
 
 
 def k3s_update(say):
