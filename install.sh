@@ -43,13 +43,7 @@ service_up () {
     systemctl restart k3s-slack-bot.service
 }
 
-install_k3s () {
-    curl -sfL https://get.k3s.io | sh -
-}
-
 install_deps
 install_app
 install_config
 service_up
-
-install_k3s
