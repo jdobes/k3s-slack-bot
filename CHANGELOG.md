@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.2 (2021-11-13)
+### Fix
+* No k3s install during installation ([`d2c2ad5`](https://github.com/jdobes/k3s-slack-bot/commit/d2c2ad516f09683beb5244f31db08027c12b5b21))
+
 ## v0.3.1 (2021-11-05)
 ### Fix
 * Url not found in text ([`31aa8b5`](https://github.com/jdobes/k3s-slack-bot/commit/31aa8b58fe462ed90d20f944c765dbeb413ef2ed))
