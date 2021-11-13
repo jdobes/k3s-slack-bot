@@ -3,7 +3,7 @@ from slack_bolt.adapter.socket_mode import SocketModeHandler
 
 import k3s_slack.config as CFG
 from k3s_slack.handlers import print_help, self_update, k3s_update, check_updates
-from k3s_slack.utils import init_logging, get_logger
+from k3s_slack.log import init_logging, get_logger
 
 init_logging()
 app = App(token=CFG.SLACK_BOT_TOKEN)
@@ -20,6 +20,12 @@ def handle_message_help(say):
 def handle_message_self_update(say):
     LOGGER.info("Self-update requested")
     self_update(say=say, force=True)
+
+
+@app.message("k3s-install")
+def handle_message_k3s_install(say):
+    LOGGER.info("K3s-install requested")
+    k3s_update(say, install=True)
 
 
 @app.message("k3s-update")
